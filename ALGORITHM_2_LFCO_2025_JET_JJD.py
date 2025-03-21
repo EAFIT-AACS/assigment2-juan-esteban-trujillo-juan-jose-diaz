@@ -54,5 +54,6 @@ def transitions(state,stack,char):
     
     return "Rule Not Define", stack
 
-strings = algo1.createstringsGrammar(2)+algo1.createStringsNoGrammar(2)
-PDA(strings)
+def test2():
+    strings = algo1.createstringsGrammar(2)+algo1.createStringsNoGrammar(2)
+    PDA(strings)
