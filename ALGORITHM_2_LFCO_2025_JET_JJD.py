@@ -1,3 +1,5 @@
+import ALGORITHM_1_LFCO_2025_JET_JJD as algo1
+
 def PDA(strings):
     
     acceptedStrings = []
@@ -9,12 +11,14 @@ def PDA(strings):
         state = "q0"
 
         if string == "":
-            state = "q2"
+            state = "q1"
 
         for char in string:
             state,stack = transitions(state,stack,char)
+            if state == "Rule Not Define":
+                break
 
-        if state == "q2" and len(stack) == 1 and stack[0] == "$":
+        if state == "q1" and len(stack) == 1 and stack[0] == "$":
             acceptedStrings.append(string)
             
         else:
@@ -31,46 +35,24 @@ def PDA(strings):
 def transitions(state,stack,char):
 
     if state == "q0":
-
-        if char == "a" and stack[-1] == "$":
+        if char == "a" and (stack[-1] == "$" or stack[-1] == "a"):
             stack.append("a")
-            state = "q1"
+            state = "q0"
             return state,stack
-
-        else:
-            state = "q3"
+        
+        elif char == "b" and stack[-1] == "a":
+            stack.pop()
+            state = "q1"
             return state,stack
 
     elif state == "q1":
-
-        if char == "a":
-            stack.append("a")
-            state = "q1"
-            return state,stack
-
-        elif char == "b" and stack[-1] == "a":
-            stack.pop()
-            state = "q2"
-            return state,stack
-
-        else:
-            state = "q3"
-            return state,stack
-
-    elif state == "q2":
-
+        
         if char == "b" and stack[-1] == "a":
             stack.pop()
-            state = "q2"
+            state = "q1"
             return state,stack
+    
+    return "Rule Not Define", stack
 
-        else:
-            state = "q3"
-            return state,stack
-
-    else:
-        stata = "q3"
-        return state,stack
-
-strings = ["aaabb","aaabbb","abab","abba","ababab","abababab", ""]
+strings = algo1.createstringsGrammar(2)+algo1.createStringsNoGrammar(2)
 PDA(strings)

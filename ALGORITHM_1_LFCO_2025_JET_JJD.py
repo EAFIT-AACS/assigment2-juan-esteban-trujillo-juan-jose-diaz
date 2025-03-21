@@ -5,7 +5,7 @@ import random
 
 # Function to create strings that the grammar accepts, the strings are generated randomly
 # The function receives the number of strings to generate
-def createstringsGrammarGrammar(NumStringsGenerated):
+def createstringsGrammar(NumStringsGenerated):
 
     # Define the alphabet
     alphabet = ['a', 'b']
@@ -40,7 +40,7 @@ def createstringsGrammarGrammar(NumStringsGenerated):
 
 # Function to create strings that the grammar does not accept, the strings are generated randomly
 # The function receives the number of strings to generate
-def createStringNoGrammar(NumStringsGenerated):
+def createStringsNoGrammar(NumStringsGenerated):
 
     # Define the alphabet
     alphabet = ['a', 'b']
@@ -104,3 +104,22 @@ def createStringNoGrammar(NumStringsGenerated):
     
     # Return the list of strings that the grammar does not accept
     return stringsNoGrammar
+
+# Function to test the algorithm
+def test():
+
+    # Generate the strings
+    stringsGrammar = createstringsGrammar(4)
+    print("Strings that the grammar accepts:")
+
+    # Print the strings in the format "String: string"
+    for string in stringsGrammar:
+        print("String: "+ string)
+    
+    # Generate the strings
+    stringsNoGrammar = createStringsNoGrammar(4)
+    print("\nStrings that the grammar does not accept:")
+
+    # Print the strings in the format "String: string"
+    for string in stringsNoGrammar:
+        print("String: "+ string)
