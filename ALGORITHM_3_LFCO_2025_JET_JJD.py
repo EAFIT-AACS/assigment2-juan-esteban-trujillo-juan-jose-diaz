@@ -1,4 +1,4 @@
-from ALGORITHM_1_LFCO_2025_JET_JJD import createstringsGrammar, createStringsNoGrammar
+from ALGORITHM_1_LFCO_2025_JET_JJD import createstringsGrammar
 from ALGORITHM_2_LFCO_2025_JET_JJD import PDA, transitions
 
 def leftmost_derivation(string):
@@ -24,11 +24,12 @@ def compute_accepting_configurations(string):
     """
     stack = ["$"]
     state = "q0"
-    configurations = [("ε", state, list(stack))]  # Initial configuration (before reading)
+    configurations = [("ε", state, string, list(stack))]  # Initial configuration (before reading)
 
-    for char in string:
+    for i, char in enumerate(string):
         state, stack = transitions(state, stack, char)
-        configurations.append((char, state, list(stack)))  # Add transition
+        remaining_input = string[i + 1:]  # Remaining input string
+        configurations.append((char, state, remaining_input, list(stack)))  # Add transition
 
     return configurations
 
@@ -47,18 +48,18 @@ def main():
         derivations = leftmost_derivation(string)
         
         print(f"\nFor the string: '{string}'\n")
-        print(f"{'Leftmost Derivation':<35} || {' Input | State  | Stack'}")
-        print("-" * 75)
+        print(f"{'Leftmost Derivation':<35} || {' State  | Remaining  | Stack'}")
+        print("-" * 100)
 
         # Ensure both lists have the same length
         max_len = max(len(configurations), len(derivations))
-        configurations += [("", "", [""])] * (max_len - len(configurations))
+        configurations += [("", "", "", [""])] * (max_len - len(configurations))
         derivations += [""] * (max_len - len(derivations))
 
         # Print aligned columns
-        for i, (derivation, (char, state, stack)) in enumerate(zip(derivations, configurations)):
+        for i, (derivation, (char, state, remaining, stack)) in enumerate(zip(derivations, configurations)):
             stack_str = "".join(stack)
-            print(f"{derivation:<35} || {char:7} | {state:5}  | {stack_str:<10}")
+            print(f"{derivation:<35} || {state:5}  | {remaining:10} | {stack_str:<10}")
 
 if __name__ == "__main__":
     main()
