@@ -7,7 +7,6 @@
 ## System and Tools Used
 - **Operating System**: Windows 11
 - **Programming Language**: Python
-- **Tools**: Standard Python libraries
 
 ## Execution Instructions
 To run the implementation, you must execute all the files available in the GitHub repository. The project consists of three main algorithms:
