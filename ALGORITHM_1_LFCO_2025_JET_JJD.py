@@ -123,3 +123,5 @@ def test():
     # Print the strings in the format "String: string"
     for string in stringsNoGrammar:
         print("String: "+ string)
+
+test()
