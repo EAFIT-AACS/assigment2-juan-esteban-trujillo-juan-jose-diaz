@@ -35,19 +35,19 @@ def PDA(strings):
 def transitions(state,stack,char):
 
     if state == "q0":
-        if char == "a" and (stack[-1] == "$" or stack[-1] == "a"):
-            stack.append("a")
+        if char == "a" and (stack[-1] == "$" or stack[-1] == "A"):
+            stack.append("A")
             state = "q0"
             return state,stack
         
-        elif char == "b" and stack[-1] == "a":
+        elif char == "b" and stack[-1] == "A":
             stack.pop()
             state = "q1"
             return state,stack
 
     elif state == "q1":
         
-        if char == "b" and stack[-1] == "a":
+        if char == "b" and stack[-1] == "A":
             stack.pop()
             state = "q1"
             return state,stack
