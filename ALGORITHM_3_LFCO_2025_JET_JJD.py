@@ -3,7 +3,7 @@ from ALGORITHM_2_LFCO_2025_JET_JJD import PDA, transitions
 
 def leftmost_derivation(string):
     """
-    Genera la derivación más a la izquierda de la cadena según la gramática:
+    Generates the leftmost derivation of the string according to the grammar:
     S → aSb | ε
     """
     derivations = ["S"]
@@ -11,56 +11,54 @@ def leftmost_derivation(string):
     
     for char in string:
         if char == "a":
-            current = current.replace("S", "aSb")  # Expande el primer S encontrado
+            current = current.replace("S", "aSb")  # Expands the first S found
         elif char == "b":
-            current = current.replace("S", "")  # Reemplaza S por vacío
+            current = current.replace("S", "")  # Replaces S with empty string
         derivations.append(current)
     
     return derivations
 
 def compute_accepting_configurations(string):
     """
-    Construye la secuencia de configuraciones de M en un cómputo de aceptación con entrada x.
+    Constructs the sequence of M configurations in an accepting computation with input x.
     """
     stack = ["$"]
     state = "q0"
-    configurations = [("ε", state, list(stack))]  # Configuración inicial (antes de leer)
+    configurations = [("ε", state, list(stack))]  # Initial configuration (before reading)
 
     for char in string:
         state, stack = transitions(state, stack, char)
-        configurations.append((char, state, list(stack)))  # Agregar transición
+        configurations.append((char, state, list(stack)))  # Add transition
 
     return configurations
 
 def main():
-    # Generar cadenas con el algoritmo 1
+    # Generate strings using Algorithm 1
     strings_grammar = createstringsGrammar(4)
 
-    # Obtener cadenas aceptadas sin imprimir resultados del PDA
+    # Get accepted strings without printing PDA results
     accepted, _ = PDA(strings_grammar)
 
-    # Construir y mostrar las configuraciones de aceptación y derivación más a la izquierda
-    print("\n--- Configuraciones de aceptación de M y derivación más a la izquierda ---\n")
+    # Build and display accepting configurations and leftmost derivation
+    print("\n--- Accepting Configurations of M and Leftmost Derivation ---\n")
     
     for string in accepted:
         configurations = compute_accepting_configurations(string)
         derivations = leftmost_derivation(string)
         
-        print(f"\nPara la cadena: '{string}'\n")
-        print(f"{'Derivación más a la izquierda':<35} || {' Entrada | Estado  | Pila'}")
+        print(f"\nFor the string: '{string}'\n")
+        print(f"{'Leftmost Derivation':<35} || {' Input | State  | Stack'}")
         print("-" * 75)
 
-        # Asegurar que ambas listas tengan la misma longitud
+        # Ensure both lists have the same length
         max_len = max(len(configurations), len(derivations))
         configurations += [("", "", [""])] * (max_len - len(configurations))
         derivations += [""] * (max_len - len(derivations))
 
-        # Imprimir en columnas alineadas
+        # Print aligned columns
         for i, (derivation, (char, state, stack)) in enumerate(zip(derivations, configurations)):
-            pila_str = "".join(stack)
-            print(f"{derivation:<35} || {char:7} | {state:5}  | {pila_str:<10}")
-
-
+            stack_str = "".join(stack)
+            print(f"{derivation:<35} || {char:7} | {state:5}  | {stack_str:<10}")
 
 if __name__ == "__main__":
     main()
