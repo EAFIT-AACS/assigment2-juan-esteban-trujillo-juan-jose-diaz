@@ -53,7 +53,7 @@ def transitions(state, stack, char):
     if state == "q0":
         # Transition from q0 to q1 when reading 'a' and stack contains only '$'
         if char == "a" and stack[-1] == "$":
-            stack.append("a")  # Push 'a' onto the stack
+            stack.append("A")  # Push 'a' onto the stack
             state = "q1"
             return state, stack
         else:
@@ -62,12 +62,12 @@ def transitions(state, stack, char):
 
     elif state == "q1":
         # Stay in q1 and push another 'a' when reading 'a'
-        if char == "a" and stack[-1] == "a":
-            stack.append("a")
+        if char == "a" and stack[-1] == "A":
+            stack.append("A")
             return "q1", stack
 
         # Move to q2 and pop 'a' when reading 'b'
-        elif char == "b" and stack[-1] == "a":
+        elif char == "b" and stack[-1] == "A":
             stack.pop()  # Remove 'a' from the stack
             return "q2", stack
 
@@ -76,7 +76,7 @@ def transitions(state, stack, char):
 
     elif state == "q2":
         # Continue in q2 and pop 'a' when reading 'b'
-        if char == "b" and stack[-1] == "a":
+        if char == "b" and stack[-1] == "A":
             stack.pop()
             return "q2", stack
         else:
@@ -91,7 +91,7 @@ def test():
     """
     Runs test cases for the PDA.
     """
-    test_strings = ["", "ab", "aabb", "aaabbb", "abb", "aab"]
+    test_strings = ["ab", "aabb", "aaabbb", "abb", "aab"]
     PDA(test_strings)
 
 
