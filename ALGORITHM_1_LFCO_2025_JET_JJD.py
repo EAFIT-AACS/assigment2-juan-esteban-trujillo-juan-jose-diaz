@@ -107,21 +107,17 @@ def createStringsNoGrammar(NumStringsGenerated):
 
 # Function to test the algorithm
 def test():
-
     # Generate the strings
-    stringsGrammar = createstringsGrammar(4)
-    print("Strings that the grammar accepts:")
-
-    # Print the strings in the format "String: string"
-    for string in stringsGrammar:
-        print("String: "+ string)
+    stringsGrammarNoGrammar = createstringsGrammar(4) + createStringsNoGrammar(4)
     
-    # Generate the strings
-    stringsNoGrammar = createStringsNoGrammar(4)
-    print("\nStrings that the grammar does not accept:")
+    # Print beutifully the output
+    print("\n" + "="*55)
+    print("🔗✨ Output of Algorithm 1: Generated Strings ✨🔗".center(50))
+    print("="*55 )
 
-    # Print the strings in the format "String: string"
-    for string in stringsNoGrammar:
-        print("String: "+ string)
+    # Print the strings with numbering and styling
+    for i, string in enumerate(stringsGrammarNoGrammar, 1):
+        print(f"🔹 {"String"} ➜ '{string}'")
 
-test()
+    # Return the list of strings
+    return stringsGrammarNoGrammar
